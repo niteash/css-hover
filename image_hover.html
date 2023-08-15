@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>css animation</title>
+   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+   <link rel="stylesheet" href="../node_modules/imagehover.css/css/imagehover.css">
+</head>
+<style>
+
+   body{
+      height: 3000px;
+   }
+ .side-img{
+   position: fixed;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   transform: translateX(250px) rotate(-10deg);
+   transition: transform 0.5s;
+ }
+
+ .show{
+   transform: translateX(0) rotate(0);
+
+ }
+
+ .stack-img{
+   width: 200px;
+   height: 150px;
+   object-fit: cover;
+   margin-left: -150px;
+   border: 5px solid white;
+ box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+   transform: rotate(10deg);
+   transition: 0.7s;
+ }
+
+ .stack-img:nth-child(1){
+   margin-left: 0;
+ }
+
+ .active{
+   transform: rotate(-10deg) translateY(-100px) translateX(-100px) scale(1.1);
+ }
+
+
+
+
+
+
+</style>
+<body class="">
+   
+ <div class="container">
+  <div class="row my-5">
+     <div class="col-12 col-md-4">
+      <figure class="imghvr-push-up">
+         <img src="./images/male0055 Background Removed.png">
+         <figcaption>
+         <h3>NIKI</h3>
+<p class="samll">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit.
+</p>
+         </figcaption>
+       </figure>
+       <!-- <figure class="imghvr-slide-left">
+         <img src="./images/male0001 Background Removed.png">
+         <figcaption>
+         <h3>NIKI</h3>
+<p class="samll">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit.
+</p>
+         </figcaption>
+       </figure>
+       <figure class="imghvr-hinge-up">
+         <img src="./images/male0121 Background Removed.png">
+         <figcaption>
+         <h3>NIKI</h3>
+<p class="samll">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit.
+</p>
+         </figcaption>
+       </figure>
+       <figure class="imghvr-shutter-out-diag-1">
+         <img src="./images/male0210 Background Removed.png">
+         <figcaption>
+         <h3>NIKI</h3>
+<p class="samll">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, fugit.
+</p>
+         </figcaption>
+       </figure> -->
+        </div>
+
+        <div class="col-12 mb-4">
+         <button class="control btn btn-primary" id="showbutton">Show</button>
+         <button class="control btn btn-primary" id="hidebutton">hide</button>
+            <button class="control btn btn-primary" id="toggle">Toggle</button>
+            
+        </div>
+
+        <div class="col-12">
+         <div class="my-5">
+            <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" class="stack-img" alt="" srcset="">
+            <img src="https://qph.cf2.quoracdn.net/main-qimg-c9075bb687330628b57476dfb59a2fe3-lq" alt="" class="stack-img" srcset="">
+            <img src="https://th.bing.com/th/id/OIG.CO2sHWK_IEYIwzXsC2hX" class="stack-img" alt="" srcset="">
+            <img src="https://img.freepik.com/premium-photo/searchlight-neon-brick-wall-with-smoke-neon-reflections-wet-asphalt-empty-scene-with-copy-space_117255-1836.jpg" class="stack-img" alt="" srcset="">
+            <img src="https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg" alt="" class="stack-img" srcset="">
+         </div>
+         <div class="col-12 mb-4">
+            <button class="control btn btn-primary" id="start">start</button>
+            <button class="control btn btn-primary" id="stop">stop</button>
+               <button class="control btn btn-primary" id="auto">Auto</button>
+               
+           </div>
+        </div>
+        
+     </div>
+  </div>
+ </div>
+ <img src="https://dogtime.com/wp-content/uploads/sites/12/2011/01/GettyImages-469196054-e1691415831480.jpg?w=1024" width="300" class="side-img"  alt="" srcset="">
+<script>
+
+   let btn = document.getElementById("showbutton");
+   let hidebtn = document.getElementById("hidebutton");
+   let toggle = document.getElementById("toggle");
+
+   let sideImg = document.querySelector(".side-img");
+
+   let start = document.getElementById("start");
+   let stop = document.getElementById("stop");
+   btn.addEventListener('click',function(){
+      // sideImg.style.transform = "translateX(0px) rotate(0)";
+      sideImg.classList.add("show")
+   });
+   hidebtn.addEventListener('click',function(){
+      // sideImg.style.transform = "translateX(250px) rotate(-10deg)";
+      sideImg.classList.remove("show")
+   })
+
+   toggle.addEventListener('click', function(){
+      sideImg.classList.toggle('show');
+   })
+
+   //effect 2
+
+   let allimg = document.querySelectorAll(".stack-img");
+   let current = 0;
+
+   function run(){
+      if(current > 0){
+      allimg[current-1].classList.remove("active");
+      }else{
+         allimg[allimg.length-1].classList.remove("active")
+      }
+      allimg[current].classList.add("active");
+      // current++;
+      if(current === allimg.length-1){
+         current = 0;
+      }else{
+         current++;
+      }
+   }
+
+   let runner;
+   start.addEventListener('click', function(){
+    runner = setInterval(run,1000);
+
+   })
+
+   stop.addEventListener('click', function(){
+      clearInterval(runner);
+
+   })
+   // function start(){
+   // }
+
+   // function stop(){
+   // }
+
+
+</script>
+
+
+</body>
+</html>
